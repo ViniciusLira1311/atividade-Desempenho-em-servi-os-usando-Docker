@@ -1,13 +1,17 @@
 services:
-  backend1:
+  app1:
     build: ./backend
-    container_name: backend1
+    container_name: app1
+    environment:
+      - CONTAINER_NAME=app1
     networks:
       - app-network
 
-  backend2:
+  app2:
     build: ./backend
-    container_name: backend2
+    container_name: app2
+    environment:
+      - CONTAINER_NAME=app2
     networks:
       - app-network
 
@@ -16,8 +20,8 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - backend1
-      - backend2
+      - app1
+      - app2
     networks:
       - app-network
 
