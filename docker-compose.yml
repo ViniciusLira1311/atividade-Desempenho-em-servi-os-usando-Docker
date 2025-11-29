@@ -1,0 +1,26 @@
+services:
+  backend1:
+    build: ./backend
+    container_name: backend1
+    networks:
+      - app-network
+
+  backend2:
+    build: ./backend
+    container_name: backend2
+    networks:
+      - app-network
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - backend1
+      - backend2
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
